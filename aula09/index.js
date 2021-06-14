@@ -4,6 +4,10 @@ const express = require('express')
 // Criar uma instancia do express
 const app = express();
 
+app.get('/', (req, res) => {
+    res.send('Você esta na Home');
+});
+
 // Desafio - Criar uma rota parametrizada, que irá se chamar /cumprimentar 
 // e terá um parâmetro que será um nome, logo, ele terá que receber esse parâmetro
 // que foi informado e exibir uma mensagem de cumprimento "Olá, nome"
@@ -15,6 +19,24 @@ const app = express();
 app.get('/cumprimentar/:nome', (req, res) => {
     const nome = req.params.nome
     res.send('Olá, ' + nome);
+});
+
+// Desafio - Criar uma rota parametrizada, que irá se chamar /calcular 
+// e terá dois parâmetros que serão números, caso, receba apenas o primeiro parâmetro, 
+// deverá retornar ele, ou, caso recebe os dois parâmetros terá que somar os dois e retornar
+// o resultado.
+
+                            // o interrogação faz com que o parametro seja opcional
+app.get('/calcular/:numero1/:numero2?', (req, res) => {
+    //recebe os parametros
+    let {numero1, numero2} = req.params
+    // condição e forçando a tipagem para numero
+    if(numero2){
+        let resultado = parseInt(numero1) + parseInt(numero2)
+        res.send('O resultado da soma é: ' + resultado)
+    } else{
+        res.send(numero1);
+    }
 });
 
 
